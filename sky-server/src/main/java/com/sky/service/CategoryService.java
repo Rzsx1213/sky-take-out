@@ -8,6 +8,8 @@ import com.sky.result.PageResult;
 import com.sky.result.Result;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 public interface CategoryService {
 
@@ -43,4 +45,11 @@ public interface CategoryService {
      * @param categoryDTO
      */
     void update(CategoryDTO categoryDTO);
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    List<Category> list(Integer type);
 }
