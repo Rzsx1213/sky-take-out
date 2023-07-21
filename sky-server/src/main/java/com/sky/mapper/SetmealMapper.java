@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 public interface SetmealMapper {
 
     /**
-     * 根据分类id查询套餐的数量
+     * 根据分类id查询套餐的数量a
      * @param id
      * @return
      */
