@@ -9,4 +9,63 @@
             (#{name},#{categoryId},#{price},#{image},#{description},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})
 
     </insert>
+    <update id="updateDish">
+      update dish
+    <set>
+        <if test="categoryId != null">
+            category_id = #{categoryId},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        <if test="image != null">
+            image = #{image},
+        </if>
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="price != null">
+            price = #{price},
+        </if>
+        <if test="status != null">
+            status = #{status}
+        </if>
+    </set>
+        <where>
+            id=#{id}
+        </where>
+
+    </update>
+    <delete id="delete">
+        DELETE d.*, f.* FROM dish d LEFT OUTER JOIN dish_flavor f ON d.id=f.dish_id  LEFT OUTER JOIN category c ON d.category_id=c.id
+        <where>
+
+            <if test="ids !=null">
+                 and d.id = #{ids}  and d.status = 0 and c.type = 1
+                </if>
+        </where>
+    </delete>
+
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        select d.*, c.`name` AS category_name FROM dish d  LEFT OUTER JOIN category c ON d.category_id=c.id
+    <where>
+            <if test="name != null">
+                and d.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status =#{status}
+            </if>
+    </where>
+order  by d.create_time desc
+    </select>
+    <select id="getById" resultType="com.sky.entity.Dish">
+        SELECT  * FROM dish
+        <where>
+            id =#{id}
+        </where>
+    </select>
+
 </mapper>

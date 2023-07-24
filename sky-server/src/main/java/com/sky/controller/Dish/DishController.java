@@ -1,16 +1,20 @@
 package com.sky.controller.Dish;
 
 import com.sky.dto.DishDTO;
+import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Dish;
+import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -29,4 +33,74 @@ public class DishController {
 
         return Result.success();
     }
+
+    /**
+     * 菜品分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation(value = "菜品分页查询")
+    public Result<PageResult> dishPage(DishPageQueryDTO dishPageQueryDTO){
+
+        PageResult pageResult =  dishService.pageQuery(dishPageQueryDTO);
+        return Result.success(pageResult);
+    }
+
+    /**
+     * 删除一个或多个菜品
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation(value = "删除菜品")
+    public Result deleteDish(@RequestParam List<Long> ids){//利用spring mvc 解析字符串
+
+        int i = dishService.deleteDish(ids);
+        if (i==0){
+            return Result.error("删除失败");
+        }
+        return Result.success();
+    }
+
+    /**
+     * 根据id查询菜品 （回显数据）
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id查询菜品")
+    public Result<DishVO> getById(@PathVariable Long id){
+
+       DishVO dishVO= dishService.getById(id);
+        return Result.success(dishVO);
+    }
+
+    /**
+     * 修改菜品信息
+     * @return
+     */
+    @PutMapping
+    @ApiOperation(value = "修改菜品信息")
+    public  Result updateDish(@RequestBody DishDTO dishDTO){
+
+        dishService.updateDish(dishDTO);
+
+    return Result.success();
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation(value = "根据分类id查询菜品")
+    public Result< List<Dish> > list(@RequestParam Long categoryId){
+
+        List<Dish> dish =dishService.getByCategoryId(categoryId);
+
+
+        return  Result.success(dish);
+    }
+
 }

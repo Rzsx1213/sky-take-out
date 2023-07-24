@@ -9,4 +9,23 @@
         (#{df.dishId},#{df.name},#{df.value})
     </foreach>
     </insert>
+    <update id="updateFlavor">
+        update dish_flavor
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="value != null">
+                value = #{value}
+            </if>
+        </set>
+        <where>
+            id =#{id}
+        </where>
+    </update>
+    <delete id="remove">
+    delete  from dish_flavor where dish_id=#{id}
+
+
+    </delete>
 </mapper>
