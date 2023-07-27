@@ -102,5 +102,13 @@ public class DishController {
 
         return  Result.success(dish);
     }
+    @PostMapping("/status/{status}")
+        public Result startOnStop(@PathVariable Integer status ,Long id){
+        Dish dish = new Dish();
+        dish.setId(id);
+        dish.setStatus(status);
+        dishService.startOnStop(dish);
+        return Result.success();
+    }
 
 }

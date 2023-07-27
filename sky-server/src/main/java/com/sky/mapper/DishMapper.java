@@ -2,12 +2,14 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -62,4 +64,13 @@ public interface DishMapper {
      */
     @Select("select * from dish where category_id=#{categoryId}")
     List<Dish> findByCategoryId(Long categoryId);
+
+    /**
+     * 动态查询菜品数据
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
+
+
 }
