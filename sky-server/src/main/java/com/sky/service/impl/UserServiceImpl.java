@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
     private WeChatProperties weChatProperties;
     @Autowired
     private UserMapper userMapper;
+
+
     private static final String WX_LOGIN ="https://api.weixin.qq.com/sns/jscode2session";
     /**
      * 向微信服务器发起请求
