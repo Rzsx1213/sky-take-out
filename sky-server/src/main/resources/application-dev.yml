@@ -10,7 +10,7 @@ sky:
     bucket-name:xxxxxxx
     endpoint:   xxxx
 
-    access-key-secret: xx
+    access-key-secret: xxx
     access-key-id: xxxx
   wechat:
     appid: xxx
