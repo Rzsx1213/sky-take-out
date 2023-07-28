@@ -89,4 +89,11 @@ public interface SetMealMapper {
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 
+    /**
+     * 根据id查询
+     * @param id
+     */
+
+    @Select("select * from setmeal  where id=#{id}")
+    Setmeal getByID(Long id);
 }
