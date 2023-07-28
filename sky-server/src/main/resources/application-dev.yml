@@ -13,5 +13,5 @@ sky:
     access-key-secret: xxxxx
     access-key-id: xxxxx
   wechat:
-    appid: xxx
+    appid: xxxx
     secret: xxx
