@@ -5,7 +5,7 @@ sky:
     port: xxxx
     database: xxx
     username: xxxxx
-    password: xxxxxx
+    password: xxxxxxx
   alioss:
     bucket-name:xxxxxxxx
     endpoint:   xxxx
